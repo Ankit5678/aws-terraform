@@ -41,3 +41,43 @@ resource "aws_security_group" "ecs_sg" {
     cidr_blocks = ["0.0.0.0/0"]
   }
 }
+
+resource "aws_security_group" "db_sg" {
+  name        = "testapp-db-security-group"
+  description = "allow inbound access from the ALB only"
+  vpc_id      = aws_vpc.test-vpc.id
+
+  ingress {
+    protocol        = "tcp"
+    from_port       = 0
+    to_port         = 0
+    security_groups = [aws_security_group.alb-sg.id]
+  }
+
+  egress {
+    protocol    = "-1"
+    from_port   = 0
+    to_port     = 0
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+}
+
+resource "aws_security_group" "mq_sg" {
+  name        = "testapp-mq-security-group"
+  description = "allow inbound access from the ECS only"
+  vpc_id      = aws_vpc.test-vpc.id
+
+  ingress {
+    protocol        = "tcp"
+    from_port       = 0
+    to_port         = 0
+    security_groups = [aws_security_group.ecs_sg.id]
+  }
+
+  egress {
+    protocol    = "-1"
+    from_port   = 0
+    to_port     = 0
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+}

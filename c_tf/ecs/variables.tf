@@ -48,6 +48,64 @@ variable "vpc_cidr_block" {
   type = string
 }
 
+variable "db-snapshot-identifier" {
+  default = "arn:aws:rds:us-east-1:324257953347:snapshot:snapshot-1"
+  description = "db ARN"
+  type = string
+}
+
+variable "db-instance" {
+  default = "db.t2.micro"
+  description = "db instance type"
+  type = string
+}
+
+variable "db-instance-identifier" {
+  default = "mysqldb-1"
+  description = "db instance identifier"
+  type = string
+}
+
+variable "broker_name" {
+  type    = string
+  default = "test-broker"
+}
+
+variable "broker_engine_type" {
+  type    = string
+  default = "RabbitMQ"
+}
+
+variable "broker_engine_version" {
+  type    = string
+  default = "3.8.22"
+}
+
+variable "broker_storage_type" {
+  type    = string
+  default = "ebs"
+}
+
+variable "broker_instance_type" {
+  type    = string
+  default = "mq.m5.large"
+}
+
+variable "broker_auth_strategy" {
+  type    = string
+  default = "simple"
+}
+
+variable "broker_deployment_strategy" {
+  type    = string
+  default = "CLUSTER_MULTI_AZ"
+}
+
+variable "broker_logging_strategy" {
+  type    = string
+  default = "general"
+}
+
 
 
 
